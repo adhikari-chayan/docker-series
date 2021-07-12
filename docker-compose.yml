@@ -1,0 +1,36 @@
+version: '3.0'
+
+services:
+   db:
+     image: mysql:5.7
+     environment:
+       MYSQL_ROOT_PASSWORD: root
+       MYSQL_DATABASE: accountowner
+       MYSQL_USER: dbuser
+       MYSQL_PASSWORD: dbuserpassword
+     volumes:
+       - dbdata:/var/lib/mysql
+       - ./_MySQL_Init_Script/init.sql:/docker-entrypoint-initdb.d/init.sql
+     restart: always
+
+   accountownerapp:
+     depends_on:
+       - db
+     image: chayana/accountowner:runtime
+     build:
+       context: .
+     ports:
+       - "8080:5000"
+      
+   phpmyadmin:
+      image: phpmyadmin/phpmyadmin:latest
+      restart: always
+      environment:
+        PMA_HOST: db
+        PMA_USER: dbuser
+        PMA_PASSWORD: dbuserpassword
+      ports:
+        - "8081:80"
+
+volumes:
+    dbdata:
