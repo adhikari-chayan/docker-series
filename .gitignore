@@ -13,3 +13,6 @@
 /Tests/obj
 /Tests/bin
 /.vs/AccountOwnerServer/DesignTimeBuild/*.dtbcache
+/Integration/bin/Debug
+/Integration/obj
+/.vs/AccountOwnerServer/DesignTimeBuild
