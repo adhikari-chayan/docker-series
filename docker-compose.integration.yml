@@ -16,7 +16,7 @@ services:
   accountownerapp:
     depends_on:
       - db
-    image: localhost:50000/chayana/accountowner:build-3
+    image: localhost:50000/chayana/accountowner:build-${BUILD_NUMBER_ACCOUNTOWNER}
 
   
   integration:
