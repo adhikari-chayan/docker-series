@@ -10,7 +10,7 @@ RUN dotnet restore
 
 COPY . .
 
-RUN dotnet test ./Tests/Tests.csproj
+RUN dotnet test --verbosity=normal ./Tests/Tests.csproj
 
 RUN dotnet publish ./AccountOwnerServer/AccountOwnerServer.csproj -o /publish/
 
@@ -20,6 +20,7 @@ WORKDIR /publish
 
 COPY --from=build-image /publish .
 
+ENV TEAMCITY_PROJECT_NAME = ${TEAMCITY_PROJECT_NAME}
 ENV ASPNETCORE_URLS="http://0.0.0.0:5000"
 
 ENTRYPOINT ["dotnet","AccountOwnerServer.dll"]
