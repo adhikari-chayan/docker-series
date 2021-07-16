@@ -16,13 +16,15 @@ services:
   accountownerapp:
     depends_on:
       - db
-    image: localhost:50000/chayana/accountowner:build-${BUILD_NUMBER_ACCOUNTOWNER}
+    image: "accountownerapp:B${BUILD_NUMBER}"
+    build:
+      context: .
 
   
   integration:
     depends_on:
       - accountownerapp
-    image: localhost:50000/chayana/accountowner:test
+    image: "accountownerapp:test-B${BUILD_NUMBER}"
     build:
       context: .
       dockerfile: Dockerfile.Integration
